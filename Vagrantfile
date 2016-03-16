@@ -1,0 +1,18 @@
+Vagrant.configure(2) do |config|
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.provision "shell", path: "scripts/provision.sh" , privileged: false
+
+  nodes = 3
+
+  nodes.times do |node_id|
+    config.vm.define "web#{node_id}" do |web|
+      web.vm.hostname = "myawesomewebserver#{node_id}"
+      web.vm.network "private_network", ip: "192.168.56.10#{node_id}"
+      web.vm.provider "virtualbox" do |vb|
+        vb.memory = "2048"
+        vb.cpus = "2"
+      end
+    end
+  end
+
+end

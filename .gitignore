@@ -1,0 +1,4 @@
+samplemake/file
+.vagrant/
+source/
+*.box
